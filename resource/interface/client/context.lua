@@ -24,6 +24,7 @@ local openContextMenu = nil
 ---@class ContextMenuProps
 ---@field id string
 ---@field title string
+---@field filter? boolean
 ---@field menu? string
 ---@field onExit? fun()
 ---@field onBack? fun()
