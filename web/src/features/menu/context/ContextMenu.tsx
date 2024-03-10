@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import HeaderButton from './components/HeaderButton';
 import ScaleFade from '../../../transitions/ScaleFade';
 import MarkdownComponents from '../../../config/MarkdownComponents';
+import SearchInput from './components/SearchInput';
 
 const openMenu = (id: string | undefined) => {
   fetchNui<ContextMenuProps>('openContext', { id: id, back: true });
@@ -44,6 +45,10 @@ const useStyles = createStyles((theme) => ({
   buttonsFlexWrapper: {
     gap: 3,
   },
+   filterContainer: {
+    marginBottom: 10,
+    color: 'red',
+  },
 }));
 
 const ContextMenu: React.FC = () => {
@@ -53,13 +58,19 @@ const ContextMenu: React.FC = () => {
     title: '',
     options: { '': { description: '', metadata: [] } },
   });
-
+  const [currentFilter, setCurrentFilter] = useState<string>('');
+  
   const closeContext = () => {
     if (contextMenu.canClose === false) return;
     setVisible(false);
     fetchNui('closeContext');
   };
 
+    // resets the filter when a new menu is loaded
+    useEffect(() => {
+      setCurrentFilter('')
+    }, [contextMenu]);
+  
   // Hides the context menu on ESC
   useEffect(() => {
     if (!visible) return;
@@ -87,6 +98,17 @@ const ContextMenu: React.FC = () => {
   return (
     <Box className={classes.container}>
       <ScaleFade visible={visible}>
+          {contextMenu.filter && (
+          <Box className={classes.filterContainer}>
+            <SearchInput
+            value={currentFilter}
+              icon="magnifying-glass"
+              handleChange={(data) => {
+                setCurrentFilter(data.target.value);
+              }}
+            />
+          </Box>
+        )}
         <Flex className={classes.header}>
           {contextMenu.menu && (
             <HeaderButton icon="chevron-left" iconSize={16} handleClick={() => openMenu(contextMenu.menu)} />
@@ -103,6 +125,17 @@ const ContextMenu: React.FC = () => {
             {Object.entries(contextMenu.options).map((option, index) => (
               <ContextButton option={option} key={`context-item-${index}`} />
             ))}
+            {Object.entries(contextMenu.options).map((option, index) =>
+              currentFilter !== '' ? (
+                ((option[1].title && option[1].title.toLowerCase().includes(currentFilter.toLowerCase())) ||
+                  (option[1].description &&
+                    option[1].description.toLowerCase().includes(currentFilter.toLowerCase()))) && (
+                  <ContextButton option={option} key={`context-item-${index}`} />
+                )
+              ) : (
+                <ContextButton option={option} key={`context-item-${index}`} />
+              )
+            )}
           </Stack>
         </Box>
       </ScaleFade>
