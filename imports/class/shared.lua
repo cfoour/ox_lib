@@ -21,8 +21,10 @@ local function assertType(id, var, expected)
     return true
 end
 
+local mixins = {}
+
 ---Creates a new instance of the given class.
-local function createObj(class, obj)
+function mixins.new(class, obj)
     if obj.private then
         assertType('private', obj.private, 'table')
         setmetatable(obj.private, private_mt)
@@ -35,6 +37,11 @@ local function createObj(class, obj)
     return obj
 end
 
+---Checks if an object is an instance of the given class.
+function mixins.instanceOf(obj, class)
+    return getmetatable(obj) == class
+end
+
 ---Creates a new class.
 ---@todo add inherited types for new/private/init fields (not yet supported by lls)
 ---@param name string
@@ -42,11 +49,9 @@ end
 function lib.class(name, super)
     assertType(1, name, 'string')
 
-    local class = {
-        __name = name,
-        new = createObj,
-    }
+    local class = table.clone(mixins)
 
+    class.__name = name
     class.__index = class
 
     return super and setmetatable(class, super) or class
