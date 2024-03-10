@@ -59,6 +59,7 @@ function lib.showContext(id)
         data = {
             title = data.title,
             canClose = data.canClose,
+            filter = data.filter,
             menu = data.menu,
             options = data.options
         }
