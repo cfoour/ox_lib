@@ -122,9 +122,7 @@ const ContextMenu: React.FC = () => {
         </Flex>
         <Box className={classes.buttonsContainer}>
           <Stack className={classes.buttonsFlexWrapper}>
-            {Object.entries(contextMenu.options).map((option, index) => (
-              <ContextButton option={option} key={`context-item-${index}`} />
-            ))}
+
             {Object.entries(contextMenu.options).map((option, index) =>
               currentFilter !== '' ? (
                 ((option[1].title && option[1].title.toLowerCase().includes(currentFilter.toLowerCase())) ||
