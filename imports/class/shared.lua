@@ -63,17 +63,17 @@ function mixins.new(class, ...)
     if constructor then
         local parent = class
 
-        function obj:super(...)
+        rawset(obj, 'super', function(self, ...)
             parent = getmetatable(parent)
             constructor = getConstructor(parent)
 
             if constructor then return constructor(self, ...) end
-        end
+        end)
 
         constructor(obj, ...)
     end
 
-    obj.super = nil
+    rawset(obj, 'super', nil)
 
     if next(obj.private) then
         local private = table.clone(obj.private)
@@ -85,7 +85,7 @@ function mixins.new(class, ...)
             __index = function(self, index)
                 local di = getinfo(2, 'n')
 
-                if di.namewhat ~= 'method' then return end
+                if di.namewhat == 'local' then return end
 
                 return private[index]
             end,

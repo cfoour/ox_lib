@@ -11,9 +11,6 @@ function lib.getLocaleKey() return settings.locale end
 
 ---@param key string
 function lib.setLocale(key)
-    settings.locale = key
-
-    SetResourceKvp('locale', key)
     TriggerEvent('ox_lib:setLocale', key)
     SendNUIMessage({
         action = 'setLocale',
@@ -29,7 +26,5 @@ RegisterNUICallback('init', function(_, cb)
         data = loadLocaleFile(settings.locale)
     })
 end)
-
-if not settings.locale then lib.setLocale(GetConvar('ox:locale', 'en')) end
 
 lib.locale(settings.locale)
