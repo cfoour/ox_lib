@@ -36,7 +36,7 @@ const useStyles = createStyles((theme) => ({
   centerCircle: {
     fill: theme.fn.primaryColor(),
     color: '#fff',
-    stroke: theme.colors.dark[6],
+    stroke: theme.colors.dark[9],
     strokeWidth: 4,
     '&:hover': {
       fill: theme.colors[theme.primaryColor][theme.fn.primaryShade() - 1],
