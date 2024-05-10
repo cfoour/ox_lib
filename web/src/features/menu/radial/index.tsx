@@ -31,7 +31,7 @@ const useStyles = createStyles((theme) => ({
     },
   },
   backgroundCircle: {
-    fill: theme.colors.dark[6],
+    fill: theme.colors.dark[9],
   },
   centerCircle: {
     fill: theme.fn.primaryColor(),
