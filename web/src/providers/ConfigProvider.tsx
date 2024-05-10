@@ -16,8 +16,8 @@ const ConfigCtx = createContext<{ config: Config; setConfig: (config: Config) =>
 
 const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [config, setConfig] = useState<Config>({
-    primaryColor: 'blue',
-    primaryShade: 6,
+    primaryColor: 'teal',
+    primaryShade: 5,
   });
 
   useEffect(() => {
