@@ -19,7 +19,6 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
     justifyContent: 'center',
     padding: 2,
     backgroundColor: theme.colors.dark[6],
-
   },
   root: {
     border: 'none',
@@ -30,7 +29,6 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
 }));
 
 const SearchInput: React.FC<Props> = ({ icon, handleChange, value }) => {
-
   const { classes } = useStyles({ canClose: false });
 
   return (
