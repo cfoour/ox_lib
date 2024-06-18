@@ -48,9 +48,9 @@ const useStyles = createStyles((theme) => ({
   },
   filterContainer: {
     
-    marginBottom: 10,
-    color: theme.colors.dark[0],
-  },
+  marginBottom: 10,
+  color: theme.colors.dark[0],
+
 }));
 
 const ContextMenu: React.FC = () => {

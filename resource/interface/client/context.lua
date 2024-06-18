@@ -24,6 +24,7 @@ local openContextMenu = nil
 ---@class ContextMenuProps
 ---@field id string
 ---@field title string
+---@field filter? boolean
 ---@field menu? string
 ---@field onExit? fun()
 ---@field onBack? fun()
@@ -58,6 +59,7 @@ function lib.showContext(id)
         data = {
             title = data.title,
             canClose = data.canClose,
+            filter = data.filter,
             menu = data.menu,
             options = data.options
         }
