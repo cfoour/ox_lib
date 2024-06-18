@@ -18,7 +18,7 @@ export const debugCircleProgressbar = () => {
     {
       action: 'circleProgress',
       data: {
-        duration: 8000,
+        duration: 80000,
         label: 'Using Armour',
       },
     },

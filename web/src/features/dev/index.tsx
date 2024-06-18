@@ -21,7 +21,7 @@ const Dev: React.FC = () => {
           onClick={() => setOpened(true)}
           radius="xl"
           variant="filled"
-          color="orange"
+          color="teal"
           sx={{ position: 'absolute', bottom: 0, right: 0, width: 50, height: 50 }}
           size="xl"
           mr={50}

@@ -13,17 +13,19 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
   button: {
     borderRadius: 4,
     flex: '1 15%',
+    clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
     alignSelf: 'stretch',
     height: 'auto',
     textAlign: 'center',
     justifyContent: 'center',
+    backgroundColor: theme.colors.dark[6],
     padding: 2,
   },
   root: {
     border: 'none',
   },
   label: {
-    color: params.canClose === false ? theme.colors.dark[2] : theme.colors.dark[0],
+    color:'#FA5252',
   },
 }));
 

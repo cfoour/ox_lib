@@ -18,6 +18,7 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.sm,
     fontFamily: 'Roboto',
     boxShadow: theme.shadows.sm,
+
   },
   title: {
     fontWeight: 500,
