@@ -5,13 +5,18 @@ import { fetchNui } from '../../utils/fetchNui';
 import ScaleFade from '../../transitions/ScaleFade';
 import type { ProgressbarProps } from '../../typings';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, { variant }: { variant: 'filled' | 'light' | 'outline' }) => ({
   container: {
+    transform: "perspective(500px) rotateX(10deg)",
     width: 350,
     height: 45,
-    borderRadius: theme.radius.sm,
-    backgroundColor: theme.colors.dark[5],
+    borderRadius: theme.radius.lg,
+    backgroundColor: variant === 'filled' ? theme.colors.dark[6] : 'rgba(0, 0, 0, 0.4)',
+    border: variant === 'outline' ? `2px solid ${theme.colors.dark[4]}` : 'none',
     overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   wrapper: {
     width: '100%',
@@ -24,7 +29,8 @@ const useStyles = createStyles((theme) => ({
   },
   bar: {
     height: '100%',
-    backgroundColor: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
+    backgroundColor: variant === 'light' ? theme.colors.cyan[7] : theme.colors.cyan[7],
+    transition: 'width linear',
   },
   labelWrapper: {
     position: 'absolute',
@@ -40,17 +46,18 @@ const useStyles = createStyles((theme) => ({
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
-    fontSize: 20,
-    color: theme.colors.gray[3],
-    textShadow: theme.shadows.sm,
+    fontSize: 18,
+    fontWeight: 600,
+    color: theme.colors.cyan[1],
   },
 }));
 
-const Progressbar: React.FC = () => {
-  const { classes } = useStyles();
+const Progressbar: React.FC<{ variant?: 'filled' | 'light' | 'outline' }> = ({ variant = 'outline' }) => {
+  const { classes } = useStyles({ variant });
   const [visible, setVisible] = React.useState(false);
   const [label, setLabel] = React.useState('');
   const [duration, setDuration] = React.useState(0);
+  const [progress, setProgress] = React.useState(0);
 
   useNuiEvent('progressCancel', () => setVisible(false));
 
@@ -58,29 +65,31 @@ const Progressbar: React.FC = () => {
     setVisible(true);
     setLabel(data.label);
     setDuration(data.duration);
+    setProgress(0);
+    
+    const interval = 10;
+    let elapsed = 0;
+    const timer = setInterval(() => {
+      elapsed += interval;
+      setProgress(Math.min(100, (elapsed / data.duration) * 100));
+      if (elapsed >= data.duration) {
+        clearInterval(timer);
+        setVisible(false);
+      }
+    }, interval);
   });
 
   return (
-    <>
-      <Box className={classes.wrapper}>
-        <ScaleFade visible={visible} onExitComplete={() => fetchNui('progressComplete')}>
-          <Box className={classes.container}>
-            <Box
-              className={classes.bar}
-              onAnimationEnd={() => setVisible(false)}
-              sx={{
-                animation: 'progress-bar linear',
-                animationDuration: `${duration}ms`,
-              }}
-            >
-              <Box className={classes.labelWrapper}>
-                <Text className={classes.label}>{label}</Text>
-              </Box>
-            </Box>
+    <Box className={classes.wrapper}>
+      <ScaleFade visible={visible} onExitComplete={() => fetchNui('progressComplete')}>
+        <Box className={classes.container}>
+          <Box className={classes.bar} sx={{ width: `${progress}%` }} />
+          <Box className={classes.labelWrapper}>
+            <Text className={classes.label}>{label}</Text>
           </Box>
-        </ScaleFade>
-      </Box>
-    </>
+        </Box>
+      </ScaleFade>
+    </Box>
   );
 };
 

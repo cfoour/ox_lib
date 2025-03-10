@@ -13,6 +13,8 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
   button: {
     borderRadius: 4,
     flex: '1 15%',
+    clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
+    transform: "perspective(500px) rotateY(-8deg)",
     alignSelf: 'stretch',
     height: 'auto',
     textAlign: 'center',
@@ -23,7 +25,7 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
     border: 'none',
   },
   label: {
-    color: params.canClose === false ? theme.colors.dark[2] : theme.colors.dark[0],
+    color: '#f76707',
   },
 }));
 

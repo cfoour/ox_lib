@@ -7,13 +7,14 @@ export const debugContext = () => {
       action: 'showContext',
       data: {
         title: 'Vehicle garage',
+        filter: true,
         options: [
           { title: 'Empty button' },
           {
-            title: 'Karin Kuruma',
-            image: 'https://cdn.discordapp.com/attachments/1063098499027173461/1064276343585505330/screenshot.jpg',
+            title: 'Bison STX',
+            image: 'https://i.ibb.co/Hf2GssZz/gbbisonstx.png',
             arrow: true,
-            colorScheme: 'blue',
+            colorScheme: 'cyan',
             metadata: [
               {
                 ['label']: 'Body',
@@ -58,7 +59,7 @@ export const debugContext = () => {
             progress: 80,
             icon: 'car-side',
             metadata: [{ label: 'Durability', value: '80%' }],
-            colorScheme: 'blue',
+            colorScheme: 'cyan',
           },
           {
             title: 'Menu button',

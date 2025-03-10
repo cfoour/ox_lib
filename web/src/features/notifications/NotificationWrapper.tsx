@@ -132,7 +132,7 @@ const Notifications: React.FC = () => {
           iconColor = 'yellow.6';
           break;
         default:
-          iconColor = 'blue.6';
+          iconColor = 'cyan.6';
           break;
       }
     } else {

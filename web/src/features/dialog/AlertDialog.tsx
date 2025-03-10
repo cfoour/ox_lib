@@ -59,9 +59,7 @@ const AlertDialog: React.FC = () => {
         <Stack className={classes.contentStack}>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
-            components={{
-              ...MarkdownComponents,
-              img: ({ ...props }) => <img style={{ maxWidth: '100%', maxHeight: '100%' }} {...props} />,
+            components={{ ...MarkdownComponents, img: ({ ...props }) => <img style={{ maxWidth: '100%', maxHeight: '100%' }} {...props} />,
             }}
           >
             {dialogData.content}
