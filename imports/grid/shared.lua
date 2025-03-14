@@ -32,7 +32,7 @@ local xDelta = (mapMaxX - mapMinX) / 34
 local yDelta = (mapMaxY - mapMinY) / 50
 local grid = {}
 local lastCell = {}
-local lastNearbyEntries = {}
+local gridCache = {}
 local entrySet = {}
 
 lib.grid = {}
@@ -81,18 +81,20 @@ function lib.grid.getCell(point)
 end
 
 ---@param point vector
----@return GridEntry[]
-function lib.grid.getNearbyEntries(point)
+---@param filter? fun(entry: GridEntry): boolean
+---@return Array<GridEntry>
+function lib.grid.getNearbyEntries(point, filter)
     local minX, maxX, minY, maxY = getGridDimensions(point, xDelta, yDelta)
 
-    if lastNearbyEntries.minX == minX and
-        lastNearbyEntries.maxX == maxX and
-        lastNearbyEntries.minY == minY and
-        lastNearbyEntries.maxY == maxY then
-        return lastNearbyEntries.entries
+    if gridCache.filter == filter and
+        gridCache.minX == minX and
+        gridCache.maxX == maxX and
+        gridCache.minY == minY and
+        gridCache.maxY == maxY then
+        return gridCache.entries
     end
 
-    local entries = {}
+    local entries = lib.array:new()
     local n = 0
 
     table.wipe(entrySet)
@@ -107,7 +109,7 @@ function lib.grid.getNearbyEntries(point)
                 for j = 1, #cell do
                     local entry = cell[j]
 
-                    if not entrySet[entry] then
+                    if not entrySet[entry] and (not filter or filter(entry)) then
                         n = n + 1
                         entrySet[entry] = true
                         entries[n] = entry
@@ -117,11 +119,12 @@ function lib.grid.getNearbyEntries(point)
         end
     end
 
-    lastNearbyEntries.minX = minX
-    lastNearbyEntries.maxX = maxX
-    lastNearbyEntries.minY = minY
-    lastNearbyEntries.maxY = maxY
-    lastNearbyEntries.entries = entries
+    gridCache.minX = minX
+    gridCache.maxX = maxX
+    gridCache.minY = minY
+    gridCache.maxY = maxY
+    gridCache.entries = entries
+    gridCache.filter = filter
 
     return entries
 end
@@ -143,6 +146,8 @@ function lib.grid.addEntry(entry)
         end
 
         grid[y] = row
+
+        table.wipe(gridCache)
     end
 end
 
@@ -180,6 +185,8 @@ function lib.grid.removeEntry(entry)
 
         ::continue::
     end
+
+    table.wipe(gridCache)
 
     return success
 end
