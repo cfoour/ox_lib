@@ -14,18 +14,18 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
     borderRadius: 4,
     flex: '1 15%',
     clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
+    transform: "perspective(500px) rotateY(-8deg)",
     alignSelf: 'stretch',
     height: 'auto',
     textAlign: 'center',
     justifyContent: 'center',
-    backgroundColor: theme.colors.dark[6],
     padding: 2,
   },
   root: {
     border: 'none',
   },
   label: {
-    color:'#FA5252',
+    color: '#f76707',
   },
 }));
 

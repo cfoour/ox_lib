@@ -1,12 +1,10 @@
 import { MantineThemeOverride } from '@mantine/core';
-//#181b1ed1 Main Background Color
-// #20C997 Main Color (teal, shade 5 in Mantine default colors)
+
 export const theme: MantineThemeOverride = {
   colorScheme: 'dark',
-  fontFamily: 'Segoe UI, Roboto, sans-serif',
+  fontFamily: 'Roboto',
   shadows: { sm: '1px 1px 3px rgba(0, 0, 0, 0.5)' },
   colors: {
-    // override dark colors to change them for all components
     dark: [
       '#d5d7e0', // 0 Main Text Color
       '#acaebf', // 1
@@ -18,6 +16,18 @@ export const theme: MantineThemeOverride = {
       '#181b1ed1', // 7 Background color for Dialog
       '#181b1ed1', // 8
       '#181B1E00', // 9 Radial Tile Background Color (Custom change)
+    ],
+    cyan: [
+      '#E0F7FA', // 0
+      '#B2EBF2', // 1
+      '#80DEEA', // 2
+      '#4DD0E1', // 3
+      '#26C6DA', // 4
+      '#00BCD4', // 5
+      '#00ACC1', // 6
+      '#0097A7', // 7
+      '#00838F', // 8
+      '#006064', // 9
     ],
   },
   components: {

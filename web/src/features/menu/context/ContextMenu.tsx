@@ -17,20 +17,20 @@ const openMenu = (id: string | undefined) => {
 const useStyles = createStyles((theme) => ({
   container: {
     position: 'absolute',
-    top: '15%',
-    right: '25%',
-    width: 320,
+    top: '25%',
+    right: '10%',
+    width: 360,
+    transform: "perspective(500px) rotateY(-8deg)",
     height: 580,
   },
   header: {
     justifyContent: 'center',
     alignItems: 'center',
-    
     marginBottom: 10,
     gap: 6,
   },
   titleContainer: {
-    borderRadius: 5,
+    borderRadius: 4,
     flex: '1 85%',
     backgroundColor: theme.colors.dark[6],
   },
@@ -47,7 +47,6 @@ const useStyles = createStyles((theme) => ({
     gap: 3,
   },
   filterContainer: {
-    
     marginBottom: 10,
     color: theme.colors.dark[0],
   },
@@ -61,18 +60,18 @@ const ContextMenu: React.FC = () => {
     options: { '': { description: '', metadata: [] } },
   });
   const [currentFilter, setCurrentFilter] = useState<string>('');
-  
+
   const closeContext = () => {
     if (contextMenu.canClose === false) return;
     setVisible(false);
     fetchNui('closeContext');
   };
 
-    // resets the filter when a new menu is loaded
-    useEffect(() => {
-      setCurrentFilter('')
-    }, [contextMenu]);
-  
+  // resets the filter when a new menu is loaded
+  useEffect(() => {
+    setCurrentFilter('')
+  }, [contextMenu]);
+
   // Hides the context menu on ESC
   useEffect(() => {
     if (!visible) return;
@@ -100,10 +99,10 @@ const ContextMenu: React.FC = () => {
   return (
     <Box className={classes.container}>
       <ScaleFade visible={visible}>
-          {contextMenu.filter && (
+        {contextMenu.filter && (
           <Box className={classes.filterContainer}>
             <SearchInput
-            value={currentFilter}
+              value={currentFilter}
               icon="magnifying-glass"
               handleChange={(data) => {
                 setCurrentFilter(data.target.value);
@@ -124,7 +123,6 @@ const ContextMenu: React.FC = () => {
         </Flex>
         <Box className={classes.buttonsContainer}>
           <Stack className={classes.buttonsFlexWrapper}>
-
             {Object.entries(contextMenu.options).map((option, index) =>
               currentFilter !== '' ? (
                 ((option[1].title && option[1].title.toLowerCase().includes(currentFilter.toLowerCase())) ||

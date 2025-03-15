@@ -15,6 +15,7 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
     flex: '1 15%',
     alignSelf: 'stretch',
     height: 'auto',
+    transform: "perspective(500px) rotateY(-8deg)",
     textAlign: 'center',
     justifyContent: 'center',
     padding: 2,
@@ -36,7 +37,7 @@ const SearchInput: React.FC<Props> = ({ icon, handleChange, value }) => {
       value={value}
       icon={<FontAwesomeIcon icon={icon} fontSize={16} fixedWidth />}
       onChange={handleChange}
-      placeholder="Filter"
+      placeholder="Search Bar"
       classNames={{ input: classes.root, label: classes.label }}
     />
   );

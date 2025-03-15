@@ -17,15 +17,17 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     whiteSpace: 'normal',
   },
   container: {
+    // Dynamic perspective and rotation based on position
+    transform: params.position === 'top-left' ? 'perspective(800px) rotateY(8deg)' : params.position === 'top-right' ? 'perspective(800px) rotateY(-8deg)' : params.position === 'bottom-left' ? 'perspective(800px) rotateY(8deg)' : params.position === 'bottom-right' ? 'perspective(800px) rotateY(-8deg)' : 'none', // Default if position is undefined
     position: 'absolute',
     pointerEvents: 'none',
-    marginTop: params.position === 'top-left' || params.position === 'top-right' ? 5 : 0,
-    marginLeft: params.position === 'top-left' || params.position === 'bottom-left' ? 5 : 0,
+    marginTop: params.position === 'top-left' || params.position === 'top-right' ? 15 : 0,
+    marginLeft: params.position === 'top-left' || params.position === 'bottom-left' ? 10 : 0,
     marginRight: params.position === 'top-right' || params.position === 'bottom-right' ? 5 : 0,
     marginBottom: params.position === 'bottom-left' || params.position === 'bottom-right' ? 5 : 0,
     right: params.position === 'top-right' || params.position === 'bottom-right' ? 1 : undefined,
     left: params.position === 'bottom-left' ? 1 : undefined,
-    bottom: params.position === 'bottom-left' || params.position === 'bottom-right' ? 1 : undefined,
+    bottom: params.position === 'bottom-left' || params.position === 'bottom-right' ? 5 : undefined,
     fontFamily: 'Roboto',
     width: 384,
   },
@@ -35,14 +37,12 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     overflow: 'hidden',
     borderRadius: params.itemCount <= 6 || params.selected === params.itemCount - 1 ? theme.radius.md : undefined,
     backgroundColor: theme.colors.dark[8],
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
   },
   scrollArrow: {
     backgroundColor: theme.colors.dark[8],
     textAlign: 'center',
-    borderBottomLeftRadius: theme.radius.md,
-    borderBottomRightRadius: theme.radius.md,
+    borderBottomLeftRadius: theme.radius.sm,
+    borderBottomRightRadius: theme.radius.sm,
     height: 25,
   },
   scrollArrowIcon: {

@@ -12,7 +12,7 @@ export interface NotificationProps {
   icon?: IconProp;
   iconColor?: string;
   iconAnimation?: IconAnimation;
-  position?: ToastPosition | 'top' | 'bottom';
+  position?: ToastPosition | 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left' | 'center-right' | 'center-left';
   id?: number | string;
   type?: string;
   alignIcon?: 'top' | 'center';

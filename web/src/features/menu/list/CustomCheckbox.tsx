@@ -7,7 +7,8 @@ const useStyles = createStyles((theme) => ({
   },
   input: {
     backgroundColor: theme.colors.dark[7],
-    '&:checked': { backgroundColor: theme.colors.dark[2], borderColor: theme.colors.dark[2] },
+
+    '&:checked': { backgroundColor: '#63e6be', borderColor: '#63e6be' },
   },
   inner: {
     '> svg > path': {
@@ -22,6 +23,7 @@ const CustomCheckbox: React.FC<{ checked: boolean }> = ({ checked }) => {
     <Checkbox
       checked={checked}
       size="md"
+
       classNames={{ root: classes.root, input: classes.input, inner: classes.inner }}
     />
   );
