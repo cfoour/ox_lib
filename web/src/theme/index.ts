@@ -29,6 +29,7 @@ export const theme: MantineThemeOverride = {
       '#00838F', // 8
       '#006064', // 9
     ],
+  
   },
   components: {
     Button: {

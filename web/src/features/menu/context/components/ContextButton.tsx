@@ -14,7 +14,7 @@ const openMenu = (id: string | undefined) => {
 const clickContext = (id: string) => {
   fetchNui('clickContext', id);
 };
-
+ 
 const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: boolean }) => ({
   inner: {
     justifyContent: 'flex-start',
@@ -29,7 +29,7 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     width: '100%',
     padding: 10,
     '&:hover': {
-      backgroundColor: params.readOnly ? theme.colors.dark[6] : undefined,
+      backgroundColor: params.readOnly ? theme.colors.dark[6] : '#212529',
       cursor: params.readOnly ? 'unset' : 'pointer',
     },
     '&:active': {

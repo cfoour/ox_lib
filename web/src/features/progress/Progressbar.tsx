@@ -7,7 +7,7 @@ import type { ProgressbarProps } from '../../typings';
 
 const useStyles = createStyles((theme, { variant }: { variant: 'filled' | 'light' | 'outline' }) => ({
   container: {
-    transform: "perspective(500px) rotateX(10deg)",
+    //transform: "perspective(500px) rotateX(10deg)",
     width: 350,
     height: 45,
     borderRadius: theme.radius.lg,

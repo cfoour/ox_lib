@@ -20,8 +20,16 @@ const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
     justifyContent: 'center',
     padding: 2,
     backgroundColor: theme.colors.dark[6],
+    '&:focus': {
+      outline: `2px solid ${theme.colors.cyan[5]}`,
+      outlineOffset: 2,
+    },
   },
   root: {
+    '&:focus': {
+      outline: `1px solid ${theme.colors.cyan[2]}`,
+      outlineOffset: 1,
+    },
     border: 'none',
   },
   label: {
