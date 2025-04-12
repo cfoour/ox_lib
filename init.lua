@@ -4,7 +4,7 @@
 
     This file is licensed under LGPL-3.0 or higher <https://www.gnu.org/licenses/lgpl-3.0.en.html>
 
-    Copyright (c) 2025 Linden <https://github.com/thelindat/fivem>
+    Copyright © 2025 Linden <https://github.com/thelindat>
 ]]
 
 if not _VERSION:find('5.4') then
@@ -139,8 +139,10 @@ function SetInterval(callback, interval, ...)
         repeat
             interval = intervals[id]
             Wait(interval)
+
+            if interval < 0 then break end
             callback(table.unpack(args))
-        until interval < 0
+        until false
         intervals[id] = nil
     end)
 
